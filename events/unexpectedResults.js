@@ -50,7 +50,7 @@ module.exports = {
 
       // Moonshine: message.content = I love you Kyle
       if (
-        message.author.name == "Moonshine" &&
+        message.author.username == "Moonshine" &&
         normalizedIncludes(message, ["i love you kyle"])
       ) {
         await replyToMessage(
