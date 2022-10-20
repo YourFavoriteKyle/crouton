@@ -1,7 +1,7 @@
 module.exports = {
   name: "messageCreate",
   once: false,
-  async execute(message) {
+  async execute(message, client, config) {
     if (message.partial) {
       try {
         return await message.fetch();
@@ -11,56 +11,38 @@ module.exports = {
       }
     }
 
-    if (
-      (message.guild.name == "Unexpected Results" ||
-        message.guild.name == "Testing Grounds") &&
-      !message.author.bot
-    ) {
-      //   Republican
-      if (normalizedIncludes(message, ["republicans"])) {
-        await replyToMessage(message, "god fearing republicans");
-      } else if (normalizedIncludes(message, ["republican"])) {
-        await replyToMessage(message, "a god fearing republican");
-      }
-
-      //   Communist
-      if (normalizedIncludes(message, ["commie", "communist", "cummie"])) {
-        await reactWithEmoji(message, "ak47");
-      }
-
-      //   Democrat
-      if (normalizedIncludes(message, ["democrat", "democrats"])) {
-        await reactWithEmoji(message, "trump");
-      }
-
-      //   Jail
-      if (
-        normalizedIncludes(message, [
-          "jail",
-          "jailbait",
-          "prison",
-          "shark",
-          "bait",
-          "ooh ha ha",
-          "haha",
-        ])
-      ) {
-        await replyToMessage(message, "SHARKBAIT! OOH HA HA!");
-      }
-
-      // Moonshine: message.content = I love you Kyle
-      if (
-        message.author.username == "Moonshine" &&
-        normalizedIncludes(message, ["i love you kyle"])
-      ) {
-        await replyToMessage(
-          message,
-          `Kyle cannot reply to this message with what you desire. Maybe one day...`
-        );
-      }
-    }
+    await config
+      .find(async (serverConfig) => serverConfig.server == message.guild.name)
+      .events.find(async (event) => event.type == "messageCreate")
+      .conditions.forEach(
+        async (condition) => await parseEventConditions(message, condition)
+      );
   },
 };
+
+async function parseEventConditions(message, messageCreateConditions) {
+  if (message.author.bot) return;
+
+  if (!messageCreateConditions.requiredAuthor.username) {
+    messageCreateConditions.requiredAuthor.username = message.author.username;
+  }
+
+  if (
+    normalizedIncludes(message, messageCreateConditions.trigger.keywords) &&
+    messageCreateConditions.requiredAuthor.username == message.author.username
+  ) {
+    await performAction(message, messageCreateConditions.action);
+  }
+}
+
+async function performAction(message, action) {
+  if (action.type == "react") {
+    await reactWithEmoji(message, action.value);
+  }
+  if (action.type == "reply") {
+    await replyToMessage(message, action.value);
+  }
+}
 
 function normalizedIncludes(message, keywords) {
   for (const key in keywords) {
