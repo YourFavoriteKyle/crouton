@@ -23,16 +23,20 @@ module.exports = {
 async function parseEventConditions(message, messageCreateConditions) {
   if (message.author.bot) return;
 
-  if (!messageCreateConditions.requiredAuthor.username) {
-    messageCreateConditions.requiredAuthor.username = message.author.username;
-  }
-
   if (
     normalizedIncludes(message, messageCreateConditions.trigger.keywords) &&
-    messageCreateConditions.requiredAuthor.username == message.author.username
+    checkRequiredAuthor(message, messageCreateConditions)
   ) {
     await performAction(message, messageCreateConditions.action);
   }
+}
+
+function checkRequiredAuthor(message, condition) {
+  if (!condition.requiredAuthor.username) return true;
+
+  if (condition.requiredAuthor.username == message.author.username) return true;
+
+  return false;
 }
 
 async function performAction(message, action) {
