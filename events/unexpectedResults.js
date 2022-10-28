@@ -50,11 +50,20 @@ async function performAction(message, action) {
 
 function normalizedIncludes(message, keywords) {
   for (const key in keywords) {
-    if (message.content.toLocaleLowerCase().includes(keywords[key])) {
-      return true;
+    if (keywords[key].split(" ").length == 1) {
+      content = message.content.split(" ");
+      for (const word in content) {
+        if (includes(content[word], keywords[key])) return true;
+      }
+    } else {
+      if (includes(message.content, keywords[key])) return true;
     }
   }
   return false;
+}
+
+function includes(content, keyword) {
+  return content.toLocaleLowerCase() == keyword.toLocaleLowerCase();
 }
 
 async function replyToMessage(message, reply) {
