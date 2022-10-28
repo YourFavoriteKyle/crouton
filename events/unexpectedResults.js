@@ -53,7 +53,7 @@ function normalizedIncludes(message, keywords) {
     if (keywords[key].split(" ").length == 1) {
       content = message.content.split(" ");
       for (const word in content) {
-        if (includes(content[word], keywords[key])) return true;
+        if (includes(content[word], keywords[key], true)) return true;
       }
     } else {
       if (includes(message.content, keywords[key])) return true;
@@ -62,8 +62,11 @@ function normalizedIncludes(message, keywords) {
   return false;
 }
 
-function includes(content, keyword) {
-  return content.toLocaleLowerCase() == keyword.toLocaleLowerCase();
+function includes(content, keyword, exact = false) {
+  if (exact) {
+    return content.toLocaleLowerCase() == keyword.toLocaleLowerCase();
+  }
+  return content.toLocaleLowerCase().includes(keyword.toLocaleLowerCase());
 }
 
 async function replyToMessage(message, reply) {
