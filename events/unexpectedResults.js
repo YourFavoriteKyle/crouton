@@ -11,10 +11,10 @@ module.exports = {
       }
     }
 
-    await config
-      .find(async (serverConfig) => serverConfig.server == message.guild.name)
-      .events.find(async (event) => event.type == "messageCreate")
-      .conditions.forEach(
+    config
+      .find((serverConfig) => serverConfig?.server == message.guild.name)
+      ?.events.find((event) => event.type == "messageCreate")
+      ?.conditions.forEach(
         async (condition) => await parseEventConditions(message, condition)
       );
   },
