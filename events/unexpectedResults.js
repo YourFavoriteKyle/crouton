@@ -1,7 +1,7 @@
 module.exports = {
   name: "messageCreate",
   once: false,
-  async execute(message) {
+  async execute(message, client, config) {
     if (message.partial) {
       try {
         return await message.fetch();
@@ -11,64 +11,59 @@ module.exports = {
       }
     }
 
-    if (
-      (message.guild.name == "Unexpected Results" ||
-        message.guild.name == "Testing Grounds") &&
-      !message.author.bot
-    ) {
-      //   Republican
-      if (normalizedIncludes(message, ["republicans"])) {
-        await replyToMessage(message, "god fearing republicans");
-      } else if (normalizedIncludes(message, ["republican"])) {
-        await replyToMessage(message, "a god fearing republican");
-      }
-
-      //   Communist
-      if (normalizedIncludes(message, ["commie", "communist", "cummie"])) {
-        await reactWithEmoji(message, "ak47");
-      }
-
-      //   Democrat
-      if (normalizedIncludes(message, ["democrat", "democrats"])) {
-        await reactWithEmoji(message, "trump");
-      }
-
-      //   Jail
-      if (
-        normalizedIncludes(message, [
-          "jail",
-          "jailbait",
-          "prison",
-          "shark",
-          "bait",
-          "ooh ha ha",
-          "haha",
-        ])
-      ) {
-        await replyToMessage(message, "SHARKBAIT! OOH HA HA!");
-      }
-
-      // Moonshine: message.content = I love you Kyle
-      if (
-        message.author.username == "Moonshine" &&
-        normalizedIncludes(message, ["i love you kyle"])
-      ) {
-        await replyToMessage(
-          message,
-          `Kyle cannot reply to this message with what you desire. Maybe one day...`
-        );
-      }
-    }
+    config
+      .find((serverConfig) => serverConfig?.server == message.guild.name)
+      ?.events.find((event) => event.type == "messageCreate")
+      ?.conditions.forEach(
+        async (condition) => await parseEventConditions(message, condition)
+      );
   },
 };
 
+async function parseEventConditions(message, messageCreateConditions) {
+  if (message.author.bot) return;
+
+  if (
+    normalizedIncludes(message, messageCreateConditions.trigger.keywords) &&
+    checkRequiredAuthor(message, messageCreateConditions)
+  ) {
+    await performAction(message, messageCreateConditions.action);
+  }
+}
+
+function checkRequiredAuthor(message, condition) {
+  if (!condition.requiredAuthor.username) return true;
+
+  if (condition.requiredAuthor.username == message.author.username) return true;
+
+  return false;
+}
+
+async function performAction(message, action) {
+  if (action.type == "react") {
+    await reactWithEmoji(message, action.value);
+  }
+  if (action.type == "reply") {
+    await replyToMessage(message, action.value);
+  }
+}
+
 function normalizedIncludes(message, keywords) {
   for (const key in keywords) {
-    if (message.content.toLocaleLowerCase().includes(keywords[key])) {
-      return true;
+    if (keywords[key].split(" ").length == 1) {
+      content = message.content.split(" ");
+      for (const word in content) {
+        if (includes(content[word], keywords[key])) return true;
+      }
+    } else {
+      if (includes(message.content, keywords[key])) return true;
     }
   }
   return false;
+}
+
+function includes(content, keyword) {
+  return content.toLocaleLowerCase() == keyword.toLocaleLowerCase();
 }
 
 async function replyToMessage(message, reply) {
