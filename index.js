@@ -19,6 +19,7 @@ const client = new Client({
 });
 
 const config = require(path.join(__dirname, "config.json"));
+const ewokese = require(path.join(__dirname, "ewokese.json"));
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
@@ -42,10 +43,12 @@ for (const file of eventFiles) {
   const event = require(filePath);
   if (event.once) {
     client.once(event.name, (...args) =>
-      event.execute(...args, client, config)
+      event.execute(...args, client, config, ewokese)
     );
   } else {
-    client.on(event.name, (...args) => event.execute(...args, client, config));
+    client.on(event.name, (...args) =>
+      event.execute(...args, client, config, ewokese)
+    );
   }
 }
 
