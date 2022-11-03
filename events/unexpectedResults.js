@@ -11,6 +11,12 @@ module.exports = {
       }
     }
 
+    if (message.embeds.length > 0) {
+      message.embeds.forEach((embed) => {
+        message.content = message.content.replace(embed.url, "");
+      });
+    }
+
     config
       .find((serverConfig) => serverConfig?.server == message.guild.name)
       ?.events.find((event) => event.type == "messageCreate")
