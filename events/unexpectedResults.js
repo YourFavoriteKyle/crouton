@@ -59,7 +59,14 @@ function normalizedIncludes(message, keywords) {
     if (keywords[key].split(" ").length == 1) {
       content = message.content.split(" ");
       for (const word in content) {
-        if (includes(content[word], keywords[key], true)) return true;
+        if (
+          includes(
+            content[word].replace(/[^a-zA-Z ]/g, ""),
+            keywords[key],
+            true
+          )
+        )
+          return true;
       }
     } else {
       if (includes(message.content, keywords[key])) return true;
