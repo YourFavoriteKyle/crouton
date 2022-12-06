@@ -1,7 +1,7 @@
 module.exports = {
   name: "messageReactionAdd",
   once: false,
-  async execute(reaction, user) {
+  async execute(reaction, user, client, config, ewokese) {
     if (!(reaction.emoji.name == "📜" || reaction.emoji.name == "ewok")) return;
 
     if (reaction.partial) {
@@ -12,8 +12,46 @@ module.exports = {
         return;
       }
     }
+
+    if (reaction.message.content.includes("https://")) return;
+
+    const englishKeys = invertJSONKeyValues(ewokese);
+
     await reaction.message.reply(
-      "I'll translate this after my human translator implements the language module. May the kna naa chesl you yehan jeerota.\n>>> May the spirit tree bring you peace friend."
+      normalizedIncludes(reaction.message, englishKeys)
     );
   },
 };
+
+// This is also removing special characters from the original text. Stop that.
+function normalizedIncludes(message, keywords) {
+  let translationArray = [];
+  message.content.split(" ").forEach((word) => {
+    translationArray.push(
+      keywords[word.toLocaleLowerCase().replace(/[^a-zA-Z ]/g, "")]
+        ? word.replace(
+            word.replace(/[^a-zA-Z ]/g, ""),
+            keywords[word.toLocaleLowerCase().replace(/[^a-zA-Z ]/g, "")]
+          )
+        : word
+    );
+  });
+  return translationArray.join(" ");
+}
+
+function invertJSONKeyValues(lang) {
+  let newLang = {};
+
+  for (const key in lang) {
+    const value = lang[key];
+    if (Array.isArray(value)) {
+      value.forEach((val) => {
+        newLang[val] = key;
+      });
+    } else {
+      newLang[value] = key;
+    }
+  }
+
+  return newLang;
+}
