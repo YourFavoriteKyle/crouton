@@ -7,6 +7,7 @@ const {
   Partials,
 } = require("discord.js");
 require("dotenv").config();
+const supabaseClient = require("../supabase.js").client;
 
 const client = new Client({
   intents: [
