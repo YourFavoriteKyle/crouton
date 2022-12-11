@@ -1,18 +1,27 @@
 <script lang="ts">
-	import { oauthState } from '../stores/auth';
+	import { page } from '$app/stores';
 </script>
 
-<div class="container">
-	<h3>Welcome to Discord Ewok Bot</h3>
-	<p>Click on the below button to get started!</p>
-	<a
-		class="button"
-		href={'https://discord.com/api/oauth2/authorize?client_id=1030596882357043220&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fauth%2Fdiscord&response_type=code&scope=identify%20email%20guilds&state=' +
-			encodeURIComponent($oauthState)}
-	>
-		Login with Discord</a
-	>
-</div>
+{#if !$page.data.session}
+	<div class="container">
+		<h3>Welcome to Discord Ewok Bot</h3>
+		<p>Click on the below button to get started!</p>
+
+		<form method="POST" action="?/signin">
+			<button class="button">Login with Discord</button>
+		</form>
+	</div>
+{:else}
+	<div>
+		<form method="POST" action="?/signout">
+			<button class="button">Sign out</button>
+		</form>
+	</div>
+	<div class="profile-container">
+		<h3>Welcome {$page.data.session.user.user_metadata.name}</h3>
+		<img src={$page.data.session.user.user_metadata.avatar_url} alt="User Avatar" />
+	</div>
+{/if}
 
 <style>
 	.button {
@@ -28,6 +37,14 @@
 		color: white;
 	}
 	.container {
+		margin: 300px auto;
+		max-width: 400px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-family: sans-serif;
+	}
+	.profile-container {
 		margin: 300px auto;
 		max-width: 400px;
 		display: flex;
