@@ -1,9 +1,13 @@
 <script lang="ts">
+	import Profile from './profile.svelte';
+	import { page } from '$app/stores';
 </script>
 
 <nav class="navbar">
 	<!-- LOGO -->
-	<div class="logo">TBD</div>
+	<div class="logo">
+		<a href="/">TBD</a>
+	</div>
 	<!-- NAV MENU -->
 	<ul class="links">
 		<input type="checkbox" id="hamburger-toggle" />
@@ -14,6 +18,15 @@
 			<li><a href="/">Commands</a></li>
 			<li><a href="/">Docs</a></li>
 			<li><a href="/">Support</a></li>
+			{#if !$page.data.session}
+				<li>
+					<form method="POST" action="?/signin">
+						<button class="button">Login</button>
+					</form>
+				</li>
+			{:else}
+				<Profile />
+			{/if}
 		</div>
 	</ul>
 </nav>
@@ -24,7 +37,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 1rem;
+		padding: 1rem var(--page-padding);
 		background-color: white;
 		color: var(--nord2);
 	}
@@ -77,6 +90,11 @@
 		}
 		.menu li {
 			margin: 0.75rem 0 0 0;
+		}
+	}
+	@media (max-width: 1450px) {
+		.navbar {
+			padding: 1rem;
 		}
 	}
 </style>

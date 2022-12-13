@@ -25,6 +25,7 @@
 <style>
 	:root {
 		font-family: 'Nunito', sans-serif;
+		--page-padding: 15%;
 	}
 	.page-container {
 		height: 100vh;
