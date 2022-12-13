@@ -37,7 +37,7 @@
 		color: white;
 	}
 	.container {
-		margin: 300px auto;
+		margin: 0 auto;
 		max-width: 400px;
 		display: flex;
 		flex-direction: column;
@@ -45,7 +45,7 @@
 		font-family: sans-serif;
 	}
 	.profile-container {
-		margin: 300px auto;
+		margin: 0 auto;
 		max-width: 400px;
 		display: flex;
 		flex-direction: column;
