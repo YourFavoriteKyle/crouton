@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import PrimaryButton from '$lib/components/buttons/primary.svelte';
 </script>
 
 <li class="profile">
@@ -13,9 +14,7 @@
 		<img src={$page.data.session?.user.user_metadata.avatar_url} alt="User Avatar" />
 		<p class="username">{$page.data.session?.user.user_metadata.name}</p>
 		<p class="email">{$page.data.session?.user.user_metadata.email}</p>
-		<form method="POST" action="?/signout">
-			<button class="button">Sign out</button>
-		</form>
+		<PrimaryButton method={'POST'} action={'?/signout'}>Sign Out</PrimaryButton>
 	</div>
 </li>
 
@@ -44,15 +43,13 @@
 		border-radius: 0.5rem;
 		top: 4.5rem;
 		text-align: center;
+		filter: drop-shadow(0rem 0rem 0.5rem var(--nord3));
 	}
 	.username {
 		font-size: 1.25rem;
 	}
 	.email {
 		font-size: 1rem;
-	}
-	.dropdown form {
-		padding-top: 1rem;
 	}
 	/* RESPONSIVE */
 	#profile-toggle {
