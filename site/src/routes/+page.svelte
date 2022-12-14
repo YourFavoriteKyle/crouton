@@ -1,55 +1,68 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import Section from '$lib/components/section.svelte';
+	import PrimaryButton from '$lib/components/buttons/primary.svelte';
 </script>
 
-{#if !$page.data.session}
-	<div class="container">
-		<h3>Welcome to Discord Ewok Bot</h3>
-		<p>Click on the below button to get started!</p>
+<Section>
+	<h1>Knead a fresh slice of bot in your server?</h1>
+	<p>Don't worry! We've got you covered like butter on bread.<br />It's the yeast we could do.</p>
+	<PrimaryButton
+		--background-color="var(--nord8)"
+		--color="var(--nord2)"
+		--border-color="var(--nord8)">Invite</PrimaryButton
+	>
+	<PrimaryButton>Support</PrimaryButton>
+</Section>
 
-		<form method="POST" action="?/signin">
-			<button class="button">Login with Discord</button>
-		</form>
+<Section half={true}>
+	<div class="half">
+		<div>
+			<h2>We're like a charcuterie board of Discord bots!</h2>
+			<p>
+				With a rising list of features, you should always be able to have some bun! Al-dough, we
+				might be short a few breadsticks as we add more features.
+			</p>
+		</div>
 	</div>
-{:else}
-	<div>
-		<form method="POST" action="?/signout">
-			<button class="button">Sign out</button>
-		</form>
-	</div>
-	<div class="profile-container">
-		<h3>Welcome {$page.data.session.user.user_metadata.name}</h3>
-		<img src={$page.data.session.user.user_metadata.avatar_url} alt="User Avatar" />
-	</div>
-{/if}
+	<figure>
+		<img
+			src="https://img.freepik.com/free-vector/drawn-types-cheese-wooden-board-illustration_23-2148809825.jpg?w=1380&t=st=1670968533~exp=1670969133~hmac=0fa852fc6f2d4ed26543bd16bd59f4043ce098cfc86c2437b8686725346b2627"
+			alt="wooden board with variety of bread"
+		/>
+		<figcaption>
+			Image by
+			<a
+				href="https://www.freepik.com/free-vector/drawn-types-cheese-wooden-board-illustration_11827634.htm#query=charcuterie%20board&position=47&from_view=keyword"
+				>Freepik</a
+			>
+		</figcaption>
+	</figure>
+</Section>
 
 <style>
-	.button {
-		outline: none;
-		padding: 10px;
-		border: none;
-		font-size: 20px;
-		margin-top: 20px;
-		border-radius: 8px;
-		background: #6d81cd;
-		cursor: pointer;
-		text-decoration: none;
-		color: white;
+	figure {
+		height: auto;
+		width: 50%;
+		padding: 0 5rem;
 	}
-	.container {
-		margin: 0 auto;
-		max-width: 400px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		font-family: sans-serif;
+	figure figcaption {
+		color: var(--nord4);
 	}
-	.profile-container {
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+	}
+	h2 {
+		font-weight: 600;
 		margin: 0 auto;
-		max-width: 400px;
+		font-size: 1.5rem;
+	}
+	p {
+		font-size: 1.125rem;
+	}
+	.half {
 		display: flex;
-		flex-direction: column;
 		align-items: center;
-		font-family: sans-serif;
+		padding-right: 5rem;
 	}
 </style>

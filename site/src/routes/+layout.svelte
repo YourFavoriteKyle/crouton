@@ -17,21 +17,14 @@
 	});
 </script>
 
-<div class="page-container">
-	<Nav />
-	<slot />
-</div>
+<Nav />
+<slot />
 
 <style>
 	:root {
 		font-family: 'Nunito', sans-serif;
+		font-weight: 300;
 		--page-padding: 15%;
-	}
-	.page-container {
-		height: 100vh;
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-		background-color: var(--nord5);
+		color: var(--nord2);
 	}
 </style>
