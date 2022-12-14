@@ -8,19 +8,21 @@
 	export let href: HREF | undefined = undefined;
 </script>
 
-<div>
-	{#if !method}
-		<a href={href?.link} alt={href?.alt}>
+{#if !method}
+	<a href={href?.link} alt={href?.alt}>
+		<div>
 			<slot />
-		</a>
-	{:else}
-		<form {method} {action}>
-			<button>
+		</div>
+	</a>
+{:else}
+	<form {method} {action}>
+		<button>
+			<div>
 				<slot />
-			</button>
-		</form>
-	{/if}
-</div>
+			</div>
+		</button>
+	</form>
+{/if}
 
 <style>
 	:root {
@@ -34,6 +36,9 @@
 		background-color: var(--hover-background-color);
 		border-radius: 0.5rem;
 		transition: 0.3s ease;
+	}
+	form {
+		display: inline-block;
 	}
 	div {
 		display: inline-block;
