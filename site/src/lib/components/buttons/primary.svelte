@@ -28,7 +28,7 @@
 		--border-color: var(--color);
 		--background-color: inherit;
 		--hover-background-color: var(--nord5);
-		--border-width: 01rem;
+		--border-width: 0.1rem;
 	}
 	div:hover {
 		background-color: var(--hover-background-color);
@@ -42,7 +42,7 @@
 		padding: 0.5rem 1rem;
 		transition: 0.3s ease;
 		border-radius: 0.5rem;
-		border-width: --border-width;
+		border-width: var(--border-width);
 		background-color: var(--background-color);
 		color: var(--color);
 		border-color: var(--border-color);
