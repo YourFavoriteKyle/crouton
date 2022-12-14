@@ -26,5 +26,7 @@
 		font-weight: 300;
 		--page-padding: 15%;
 		color: var(--nord2);
+		max-width: 100rem;
+		margin: 0 auto;
 	}
 </style>

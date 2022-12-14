@@ -27,27 +27,26 @@
 				might be short a few breadsticks as we add more features.
 			</p>
 		</div>
+		<figure>
+			<img
+				src="https://img.freepik.com/free-vector/drawn-types-cheese-wooden-board-illustration_23-2148809825.jpg?w=1380&t=st=1670968533~exp=1670969133~hmac=0fa852fc6f2d4ed26543bd16bd59f4043ce098cfc86c2437b8686725346b2627"
+				alt="wooden board with variety of bread"
+			/>
+			<figcaption>
+				Image by
+				<a
+					href="https://www.freepik.com/free-vector/drawn-types-cheese-wooden-board-illustration_11827634.htm#query=charcuterie%20board&position=47&from_view=keyword"
+					>Freepik</a
+				>
+			</figcaption>
+		</figure>
 	</div>
-	<figure>
-		<img
-			src="https://img.freepik.com/free-vector/drawn-types-cheese-wooden-board-illustration_23-2148809825.jpg?w=1380&t=st=1670968533~exp=1670969133~hmac=0fa852fc6f2d4ed26543bd16bd59f4043ce098cfc86c2437b8686725346b2627"
-			alt="wooden board with variety of bread"
-		/>
-		<figcaption>
-			Image by
-			<a
-				href="https://www.freepik.com/free-vector/drawn-types-cheese-wooden-board-illustration_11827634.htm#query=charcuterie%20board&position=47&from_view=keyword"
-				>Freepik</a
-			>
-		</figcaption>
-	</figure>
 </Section>
 
 <style>
 	figure {
 		height: auto;
-		width: 50%;
-		padding: 0 5rem;
+		max-width: 12.5rem;
 	}
 	figure figcaption {
 		color: var(--nord4);
@@ -67,6 +66,20 @@
 	.half {
 		display: flex;
 		align-items: center;
-		padding-right: 5rem;
+	}
+	.half > div {
+		padding: 0 12.5rem 0 0;
+	}
+	@media (max-width: 1000px) {
+		.half {
+			display: block;
+		}
+		.half > div {
+			padding: 0;
+		}
+		figure {
+			margin: 0 auto;
+			max-width: 100%;
+		}
 	}
 </style>
