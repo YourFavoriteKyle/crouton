@@ -7,11 +7,15 @@
 	<h1>Knead a fresh slice of bot in your server?</h1>
 	<p>Don't worry! We've got you covered like butter on bread.<br />It's the yeast we could do.</p>
 	<PrimaryButton
+		method={'POST'}
+		action={'?/invite'}
 		--background-color="var(--nord8)"
 		--color="var(--nord2)"
 		--border-color="var(--nord8)">Invite</PrimaryButton
 	>
-	<PrimaryButton>Support</PrimaryButton>
+	<PrimaryButton href={{ link: 'https://discord.gg/kFZ4zfhjCc', alt: 'support server invite link' }}
+		>Support</PrimaryButton
+	>
 </Section>
 
 <Section half={true}>

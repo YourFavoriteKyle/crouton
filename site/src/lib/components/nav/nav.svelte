@@ -18,7 +18,7 @@
 			<a href="/"><li>Invite</li></a>
 			<a href="/"><li>Commands</li></a>
 			<a href="/"><li>Docs</li></a>
-			<a href="/"><li>Support</li></a>
+			<a href="https://discord.gg/kFZ4zfhjCc"><li>Support</li></a>
 			{#if !$page.data.session}
 				<PrimaryButton method={'POST'} action={'?/signin'} --border-width="0">Login</PrimaryButton>
 			{:else}
