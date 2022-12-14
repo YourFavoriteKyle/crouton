@@ -9,7 +9,7 @@
 	<div class="half">
 		<div>
 			<p>
-				You've ventured to deep into the bakery. Either this dough is still mixing, or there is no
+				You've ventured deep into the bakery. Either this dough is still mixing, or there is no
 				bread to be had here.
 			</p>
 			<p>Let's go back to the counter. Don't worry! You can crust me! There is nothing here yet.</p>
