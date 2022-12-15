@@ -1,11 +1,9 @@
 <script lang="ts">
-	import Section from '$lib/components/section.svelte';
 	import PrimaryButton from '$lib/components/buttons/primary.svelte';
 </script>
 
-<Section>
-	<h1>Oops! This isn't the bakery!</h1>
-	<h2>Error 404</h2>
+<div class="content">
+	<h1>Oops! Error 404<br />This isn't the bakery!</h1>
 	<div class="half">
 		<div>
 			<p>
@@ -29,44 +27,55 @@
 			</figcaption>
 		</figure>
 	</div>
-</Section>
+</div>
 
 <style>
 	figure {
 		height: auto;
-		max-width: 90%;
-		padding: 0 5rem;
+		max-width: 25rem;
+		margin: 0 0 0 4rem;
 	}
 	figure figcaption {
 		color: var(--nord4);
+		text-align: center;
 	}
 	h1 {
 		font-size: 2.5rem;
 		font-weight: 700;
-		margin: 0 auto;
-	}
-	h2 {
-		font-weight: 600;
-		margin: 0 auto;
-		padding: 1rem 0;
-		font-size: 2rem;
 	}
 	p {
 		font-size: 1.125rem;
-		padding-bottom: 2rem;
+		padding-bottom: 1.5rem;
+	}
+	.content {
+		text-align: center;
+		padding: 2rem 0;
 	}
 	.half {
 		display: flex;
 		align-items: center;
-		/* padding-right: 5rem; */
+		text-align: left;
+		max-width: 50rem;
+		padding: 2rem 0 0 0;
+		margin: 0 auto;
 	}
-	@media (max-width: 1000px) {
-		.half {
-			display: block;
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 1.75rem;
 		}
 		figure {
-			margin: 0 auto;
-			width: 100%;
+			max-width: 100%;
+			margin: 0 0 2rem 0;
+		}
+		.half {
+			flex-direction: column-reverse;
+			text-align: center;
+			align-items: center;
+		}
+	}
+	@media (max-width: 1450px) {
+		figure {
+			margin: 0;
 		}
 	}
 </style>
