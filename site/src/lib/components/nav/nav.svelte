@@ -15,12 +15,12 @@
 		<label for="hamburger-toggle" class="hamburger">&#9776</label>
 		<!--  NAV MENUS -->
 		<div class="menu">
-			<a href="/"><li>Invite</li></a>
+			<PrimaryButton method={'POST'} action={'/?/invite'} --border-width="0">Invite</PrimaryButton>
 			<a href="/"><li>Commands</li></a>
 			<a href="/"><li>Docs</li></a>
 			<a href="https://discord.gg/kFZ4zfhjCc"><li>Support</li></a>
 			{#if !$page.data.session}
-				<PrimaryButton method={'POST'} action={'?/signin'} --border-width="0">Login</PrimaryButton>
+				<PrimaryButton method={'POST'} action={'/?/signin'} --border-width="0">Login</PrimaryButton>
 			{:else}
 				<Profile />
 			{/if}

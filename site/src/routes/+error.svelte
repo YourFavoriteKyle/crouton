@@ -13,7 +13,7 @@
 				bread to be had here.
 			</p>
 			<p>Let's go back to the counter. Don't worry! You can crust me! There is nothing here yet.</p>
-			<PrimaryButton href={{ link: '/', alt: 'home page' }}>Back to the Counter</PrimaryButton>
+			<PrimaryButton href={'/'}>Back to the Counter</PrimaryButton>
 		</div>
 		<figure>
 			<img
