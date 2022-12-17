@@ -3,20 +3,21 @@
 	export let method: string | undefined = undefined;
 	export let action: string | undefined = undefined;
 	export let href: string | undefined = undefined;
+	export let active = true;
 </script>
 
 {#if !method}
-	<a {href} class:active={$page.url.pathname === href}>
-		<div>
+	<a {href} class:active={$page.url.pathname === href && active}>
+		<span>
 			<slot />
-		</div>
+		</span>
 	</a>
 {:else}
 	<form {method} {action}>
 		<button>
-			<div>
+			<span>
 				<slot />
-			</div>
+			</span>
 		</button>
 	</form>
 {/if}
@@ -31,7 +32,7 @@
 		--button-border-width: 0.1rem;
 		--button-padding: 0.5rem 1rem;
 	}
-	div:hover {
+	span:hover {
 		background-color: var(--button-hover-bg-color);
 		border-radius: 0.5rem;
 		transition: 0.3s ease;
@@ -43,7 +44,7 @@
 	.active {
 		border-bottom-width: 0.1rem;
 	}
-	div {
+	span {
 		display: inline-block;
 		max-width: 30rem;
 		width: fit-content;
