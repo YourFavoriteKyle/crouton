@@ -8,29 +8,48 @@
 	<div class="container">
 		<!-- LOGO -->
 		<div class="logo">
-			<a href="/">Crouton</a>
+			<PrimaryButton
+				href={'/'}
+				active={false}
+				--button-hover-bg-color="none"
+				--button-border-width="0">Crouton</PrimaryButton
+			>
 		</div>
 		<!-- NAV MENU -->
-		<ul class="links">
+		<div class="links">
 			<input type="checkbox" id="hamburger-toggle" />
 			<label for="hamburger-toggle" class="hamburger">&#9776</label>
 			<!--  NAV MENUS -->
-			<div class="menu">
-				<PrimaryButton method={'POST'} action={'/?/invite'} --button-border-width="0"
-					>Invite</PrimaryButton
-				>
-				<a href="/"><li>Commands</li></a>
-				<a href="/"><li>Docs</li></a>
-				<a href="https://discord.gg/kFZ4zfhjCc"><li>Support</li></a>
-				{#if !$page.data.session}
-					<PrimaryButton method={'POST'} action={'/?/signin'} --button-border-width="0"
-						>Login</PrimaryButton
+			<ul class="menu">
+				<li>
+					<PrimaryButton method={'POST'} action={'/?/invite'} --button-border-width="0"
+						>Invite</PrimaryButton
 					>
+				</li>
+				<li>
+					<PrimaryButton href={'/commands'} --button-border-width="0">Commands</PrimaryButton>
+				</li>
+				<li>
+					<PrimaryButton href={'/docs'} --button-border-width="0">Docs</PrimaryButton>
+				</li>
+				<li>
+					<PrimaryButton href={'https://discord.gg/kFZ4zfhjCc'} --button-border-width="0"
+						>Support</PrimaryButton
+					>
+				</li>
+				{#if !$page.data.session}
+					<li>
+						<PrimaryButton method={'POST'} action={'/?/signin'} --button-border-width="0"
+							>Login</PrimaryButton
+						>
+					</li>
 				{:else}
-					<Profile />
+					<li>
+						<Profile />
+					</li>
 				{/if}
-			</div>
-		</ul>
+			</ul>
+		</div>
 	</div>
 </nav>
 
@@ -48,9 +67,6 @@
 	.container {
 		padding: 1rem 2rem;
 	}
-	.links a {
-		color: inherit;
-	}
 	.logo {
 		font-size: 2rem;
 		font-weight: 500;
@@ -59,15 +75,6 @@
 		display: flex;
 		gap: 1.25rem;
 		font-size: 1.125rem;
-	}
-	.menu li:hover {
-		background-color: var(--nord5);
-		border-radius: 0.5rem;
-		transition: 0.3s ease;
-	}
-	.menu li {
-		padding: 0.5rem 1rem;
-		transition: 0.3s ease;
 	}
 	/* RESPONSIVE */
 	/* HAMBURGER TOGGLE */
