@@ -19,7 +19,7 @@
 	});
 </script>
 
-<div class="container">
+<div class="layout">
 	<Nav />
 	<div class="content">
 		<slot />
@@ -28,22 +28,14 @@
 </div>
 
 <style>
-	:root {
-		--page-padding: 15%;
-		font-family: 'Nunito', sans-serif;
-		font-weight: 300;
-		color: var(--nord2);
-		max-width: 100rem;
-		margin: 0 auto;
-	}
-	.container {
+	.layout {
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
 		margin: 0;
 	}
 	.content {
-		padding: 0rem var(--page-padding);
+		padding: 5rem 0;
 		flex: 1;
 	}
 </style>

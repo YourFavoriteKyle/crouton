@@ -3,17 +3,19 @@
 	import PrimaryButton from '$lib/components/buttons/primary.svelte';
 </script>
 
-<Section>
+<Section --section-text-align="center">
 	<h1>Knead a fresh slice of bot in your server?</h1>
 	<p>Don't worry! We've got you covered like butter on bread.<br />It's the yeast we could do.</p>
-	<PrimaryButton
-		method={'POST'}
-		action={'/?/invite'}
-		--background-color="var(--nord8)"
-		--color="var(--nord2)"
-		--border-color="var(--nord8)">Invite</PrimaryButton
-	>
-	<PrimaryButton href={'https://discord.gg/kFZ4zfhjCc'}>Support</PrimaryButton>
+	<div>
+		<PrimaryButton
+			method={'POST'}
+			action={'/?/invite'}
+			--button-bg-color="var(--nord8)"
+			--button-color="var(--nord2)"
+			--button-border-color="var(--nord8)">Invite</PrimaryButton
+		>
+		<PrimaryButton href={'https://discord.gg/kFZ4zfhjCc'}>Support</PrimaryButton>
+	</div>
 </Section>
 
 <Section half={true}>
@@ -42,11 +44,12 @@
 <style>
 	figure {
 		height: auto;
-		max-width: 12.5rem;
+		width: 25rem;
 		margin: 0 auto;
 	}
 	figure figcaption {
 		color: var(--nord4);
+		text-align: center;
 	}
 	h1 {
 		font-size: 2.5rem;
@@ -64,6 +67,17 @@
 		padding: 0 12.5rem 0 0;
 	}
 	@media (max-width: 1000px) {
+		figure {
+			width: 50%;
+		}
+		.section-content {
+			padding: 0;
+		}
+	}
+	@media (max-width: 768px) {
+		figure {
+			width: 75%;
+		}
 		.section-content {
 			padding: 0;
 		}

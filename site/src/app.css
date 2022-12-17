@@ -1,12 +1,16 @@
-/* 
-Override TailwindCSS img max-width as it seems to cause img sizing inconsistencies in Safari 
-Changed from:
-    img,
-    video {
-    max-width: 100%;
-    height: auto;
-    }
-*/
-img {
-	max-width: inherit;
+/* Global Styles */
+:root {
+	--max-page-width: 75rem;
+	--page-padding: 15%;
+	font-family: 'Nunito', sans-serif;
+	font-weight: 300;
+	color: var(--nord2);
+	margin: 0 auto;
+}
+.container {
+	max-width: var(--max-page-width);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 auto;
 }

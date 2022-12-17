@@ -23,19 +23,19 @@
 
 <style>
 	:root {
-		--color: var(--nord2);
-		--hover-color: var(--nord2);
-		--border-color: var(--nord2);
-		--background-color: inherit;
-		--hover-background-color: var(--nord5);
-		--border-width: 0.1rem;
-		--padding: 0.5rem 1rem;
+		--button-color: var(--nord2);
+		--button-hover-color: var(--nord2);
+		--button-border-color: var(--nord2);
+		--button-bg-color: inherit;
+		--button-hover-bg-color: var(--nord5);
+		--button-border-width: 0.1rem;
+		--button-padding: 0.5rem 1rem;
 	}
 	div:hover {
-		background-color: var(--hover-background-color);
+		background-color: var(--button-hover-bg-color);
 		border-radius: 0.5rem;
 		transition: 0.3s ease;
-		color: var(--hover-color);
+		color: var(--button-hover-color);
 	}
 	form {
 		display: inline-block;
@@ -47,12 +47,12 @@
 		display: inline-block;
 		max-width: 30rem;
 		width: fit-content;
-		padding: var(--padding);
+		padding: var(--button-padding);
 		transition: 0.3s ease;
 		border-radius: 0.5rem;
-		border-width: var(--border-width);
-		background-color: var(--background-color);
+		border-width: var(--button-border-width);
+		background-color: var(--button-bg-color);
 		color: var(--color);
-		border-color: var(--border-color);
+		border-color: var(--button-border-color);
 	}
 </style>

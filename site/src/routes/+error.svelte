@@ -1,10 +1,11 @@
 <script lang="ts">
 	import PrimaryButton from '$lib/components/buttons/primary.svelte';
+	import Section from '$lib/components/section.svelte';
 </script>
 
-<div class="content">
+<Section>
 	<h1>Oops! Error 404<br />This isn't the bakery!</h1>
-	<div class="half">
+	<div class="container">
 		<div>
 			<p>
 				You've ventured deep into the bakery. Either this dough is still mixing, or there is no
@@ -27,13 +28,12 @@
 			</figcaption>
 		</figure>
 	</div>
-</div>
+</Section>
 
 <style>
 	figure {
 		height: auto;
-		max-width: 25rem;
-		margin: 0 0 0 4rem;
+		width: 50rem;
 	}
 	figure figcaption {
 		color: var(--nord4);
@@ -42,40 +42,29 @@
 	h1 {
 		font-size: 2.5rem;
 		font-weight: 700;
+		text-align: center;
 	}
 	p {
 		font-size: 1.125rem;
 		padding-bottom: 1.5rem;
 	}
-	.content {
-		text-align: center;
-		padding: 2rem 0;
-	}
-	.half {
-		display: flex;
-		align-items: center;
+	.container {
 		text-align: left;
 		max-width: 50rem;
-		padding: 2rem 0 0 0;
-		margin: 0 auto;
+		margin: 2rem auto;
 	}
-	@media (max-width: 768px) {
+	@media (max-width: 1000px) {
 		h1 {
 			font-size: 1.75rem;
 		}
 		figure {
-			max-width: 100%;
+			width: 70%;
 			margin: 0 0 2rem 0;
 		}
-		.half {
+		.container {
 			flex-direction: column-reverse;
 			text-align: center;
 			align-items: center;
-		}
-	}
-	@media (max-width: 1450px) {
-		figure {
-			margin: 0;
 		}
 	}
 </style>

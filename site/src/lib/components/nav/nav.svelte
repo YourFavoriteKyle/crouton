@@ -4,38 +4,49 @@
 	import PrimaryButton from '$lib/components/buttons/primary.svelte';
 </script>
 
-<nav class="navbar">
-	<!-- LOGO -->
-	<div class="logo">
-		<a href="/">Crouton</a>
-	</div>
-	<!-- NAV MENU -->
-	<ul class="links">
-		<input type="checkbox" id="hamburger-toggle" />
-		<label for="hamburger-toggle" class="hamburger">&#9776</label>
-		<!--  NAV MENUS -->
-		<div class="menu">
-			<PrimaryButton method={'POST'} action={'/?/invite'} --border-width="0">Invite</PrimaryButton>
-			<a href="/"><li>Commands</li></a>
-			<a href="/"><li>Docs</li></a>
-			<a href="https://discord.gg/kFZ4zfhjCc"><li>Support</li></a>
-			{#if !$page.data.session}
-				<PrimaryButton method={'POST'} action={'/?/signin'} --border-width="0">Login</PrimaryButton>
-			{:else}
-				<Profile />
-			{/if}
+<nav>
+	<div class="container">
+		<!-- LOGO -->
+		<div class="logo">
+			<a href="/">Crouton</a>
 		</div>
-	</ul>
+		<!-- NAV MENU -->
+		<ul class="links">
+			<input type="checkbox" id="hamburger-toggle" />
+			<label for="hamburger-toggle" class="hamburger">&#9776</label>
+			<!--  NAV MENUS -->
+			<div class="menu">
+				<PrimaryButton method={'POST'} action={'/?/invite'} --button-border-width="0"
+					>Invite</PrimaryButton
+				>
+				<a href="/"><li>Commands</li></a>
+				<a href="/"><li>Docs</li></a>
+				<a href="https://discord.gg/kFZ4zfhjCc"><li>Support</li></a>
+				{#if !$page.data.session}
+					<PrimaryButton method={'POST'} action={'/?/signin'} --button-border-width="0"
+						>Login</PrimaryButton
+					>
+				{:else}
+					<Profile />
+				{/if}
+			</div>
+		</ul>
+	</div>
 </nav>
 
 <style>
+	:root {
+		--nav-bg-color: white;
+	}
 	/* NAVBAR STYLING */
-	.navbar {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 1rem var(--page-padding);
-		background-color: white;
+	nav {
+		background-color: var(--nav-bg-color);
+		position: fixed;
+		top: 0;
+		width: 100%;
+	}
+	.container {
+		padding: 1rem 2rem;
 	}
 	.links a {
 		color: inherit;
@@ -87,11 +98,6 @@
 		}
 		.menu li {
 			margin: 0.75rem 0 0 0;
-		}
-	}
-	@media (max-width: 1450px) {
-		.navbar {
-			padding: 1rem;
 		}
 	}
 </style>

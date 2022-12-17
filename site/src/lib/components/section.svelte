@@ -2,41 +2,36 @@
 	export let half = false;
 </script>
 
-<section class:half>
-	<slot />
+<section>
+	<div class="container {half ? 'row' : 'column'}">
+		<slot />
+	</div>
 </section>
 
 <style>
-	section:first-of-type {
-		padding: 8rem 0 8rem 0;
-	}
-	section:last-of-type {
-		padding-bottom: 16rem;
+	:root {
+		--section-bg-color: inherit;
+		--section-text-align: inherit;
 	}
 	section {
-		padding: 8rem 0;
-		text-align: center;
-		word-wrap: break-word;
-	}
-
-	.half {
+		background-color: var(--section-bg-color);
+		text-align: var(--section-text-align);
+		min-height: 25rem;
 		display: flex;
-		text-align: left;
-		vertical-align: middle;
 		align-items: center;
 	}
+	.container {
+		padding: 1rem 2rem;
+	}
+	.column {
+		flex-direction: column;
+	}
+	.row {
+		flex-direction: row;
+	}
 	@media (max-width: 1000px) {
-		.half {
-			display: block;
-		}
-		section {
-			padding: 4rem 0;
-		}
-		section:first-of-type {
-			padding: 4rem 0 4rem 0;
-		}
-		section:last-of-type {
-			padding-bottom: 8rem;
+		.container {
+			flex-direction: column;
 		}
 	}
 </style>
