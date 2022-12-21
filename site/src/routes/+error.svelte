@@ -1,19 +1,18 @@
 <script lang="ts">
-	import Section from '$lib/components/section.svelte';
 	import PrimaryButton from '$lib/components/buttons/primary.svelte';
+	import Section from '$lib/components/section.svelte';
 </script>
 
 <Section>
-	<h1>Oops! This isn't the bakery!</h1>
-	<h2>Error 404</h2>
-	<div class="half">
+	<h1>Oops! Error 404<br />This isn't the bakery!</h1>
+	<div class="container">
 		<div>
 			<p>
-				You've ventured to deep into the bakery. Either this dough is still mixing, or there is no
+				You've ventured deep into the bakery. Either this dough is still mixing, or there is no
 				bread to be had here.
 			</p>
 			<p>Let's go back to the counter. Don't worry! You can crust me! There is nothing here yet.</p>
-			<PrimaryButton href={{ link: '/', alt: 'home page' }}>Back to the Counter</PrimaryButton>
+			<PrimaryButton href={'/'}>Back to the Counter</PrimaryButton>
 		</div>
 		<figure>
 			<img
@@ -34,39 +33,38 @@
 <style>
 	figure {
 		height: auto;
-		max-width: 90%;
-		padding: 0 5rem;
+		width: 50rem;
 	}
 	figure figcaption {
 		color: var(--nord4);
+		text-align: center;
 	}
 	h1 {
 		font-size: 2.5rem;
 		font-weight: 700;
-		margin: 0 auto;
-	}
-	h2 {
-		font-weight: 600;
-		margin: 0 auto;
-		padding: 1rem 0;
-		font-size: 2rem;
+		text-align: center;
 	}
 	p {
 		font-size: 1.125rem;
-		padding-bottom: 2rem;
+		padding-bottom: 1.5rem;
 	}
-	.half {
-		display: flex;
-		align-items: center;
-		/* padding-right: 5rem; */
+	.container {
+		text-align: left;
+		max-width: 50rem;
+		margin: 2rem auto;
 	}
 	@media (max-width: 1000px) {
-		.half {
-			display: block;
+		h1 {
+			font-size: 1.75rem;
 		}
 		figure {
-			margin: 0 auto;
-			width: 100%;
+			width: 70%;
+			margin: 0 0 2rem 0;
+		}
+		.container {
+			flex-direction: column-reverse;
+			text-align: center;
+			align-items: center;
 		}
 	}
 </style>
