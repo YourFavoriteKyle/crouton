@@ -12,3 +12,4 @@ vite.config.ts.timestamp-*
 DS_STORE
 config.json
 .vercel
+*.code-workspace
