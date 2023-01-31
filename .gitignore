@@ -1,8 +1,9 @@
 node_modules
-.env
+*.env
 .env.*
 !.env.example
 /site/build
+/bot/build
 /site/.svelte-kit
 /site/package
 vite.config.js.timestamp-*
@@ -11,3 +12,4 @@ vite.config.ts.timestamp-*
 DS_STORE
 config.json
 .vercel
+*.code-workspace
