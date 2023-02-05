@@ -9,7 +9,7 @@
 	<div>
 		<PrimaryButton
 			method={'POST'}
-			action={'/?/invite'}
+			action={'/invite'}
 			--button-bg-color="var(--nord8)"
 			--button-color="var(--nord2)"
 			--button-border-color="var(--nord8)">Invite</PrimaryButton

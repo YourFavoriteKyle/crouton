@@ -23,8 +23,7 @@ async function signIn(
 	throw err(500, 'Server error. Please try again later.');
 }
 
-/** @type {import('./$types').Actions} */
-export const actions: Actions = {
+export const actions = {
 	signin: async (event) => {
 		await signIn(event, ['identify', 'email', 'guilds']);
 	},
@@ -39,4 +38,4 @@ export const actions: Actions = {
 			permissions: '277025459200'
 		});
 	}
-};
+} satisfies Actions;

@@ -18,7 +18,7 @@
 						--button-padding="0"
 						--button-border-width="0"
 						method={'POST'}
-						action={'/?/invite'}>Invite</PrimaryButton
+						action={'/invite'}>Invite</PrimaryButton
 					>
 				</li>
 				<li>

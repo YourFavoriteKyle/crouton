@@ -3,7 +3,7 @@
 	import '../app.css';
 	import { supabase } from '$lib/db';
 	import { browser, dev } from '$app/environment';
-	import { invalidate } from '$app/navigation';
+	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Nav from '$lib/components/nav/nav.svelte';
@@ -25,7 +25,7 @@
 		const {
 			data: { subscription }
 		} = supabase.auth.onAuthStateChange(() => {
-			invalidate('supabase:auth');
+			invalidateAll();
 		});
 
 		return () => {
@@ -50,7 +50,7 @@
 		margin: 0;
 	}
 	.content {
-		padding: 5rem 0;
+		padding: 6rem 0;
 		flex: 1;
 	}
 </style>

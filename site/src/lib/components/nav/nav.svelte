@@ -22,7 +22,7 @@
 			<!--  NAV MENUS -->
 			<ul class="menu">
 				<li>
-					<PrimaryButton method={'POST'} action={'/?/invite'} --button-border-width="0"
+					<PrimaryButton method={'POST'} action={'/invite'} --button-border-width="0"
 						>Invite</PrimaryButton
 					>
 				</li>
@@ -39,7 +39,7 @@
 				</li>
 				{#if !$page.data.session}
 					<li>
-						<PrimaryButton method={'POST'} action={'/?/signin'} --button-border-width="0"
+						<PrimaryButton method={'POST'} action={'/login'} --button-border-width="0"
 							>Login</PrimaryButton
 						>
 					</li>
