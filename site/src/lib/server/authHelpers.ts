@@ -33,8 +33,6 @@ export async function login(
 		}
 	});
 
-	console.log(data.url);
-
 	if (!error) {
 		throw redirect(303, data.url);
 	}
