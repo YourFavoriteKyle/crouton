@@ -1,15 +1,4 @@
-<script lang="ts">
-	import type { PageData } from './$types';
-	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
-
-	export let data: PageData;
-
-	onMount(async () => {
-		if (data.session) {
-			goto('/dashboard');
-			return;
-		}
-		goto('/');
-	});
-</script>
+<!--
+	NOTE: This file is only here because it is required for +page.ts to load in the browser
+	The logic in +page.ts could and probably should be moved into this file...
+-->

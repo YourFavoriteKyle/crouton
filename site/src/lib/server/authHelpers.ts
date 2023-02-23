@@ -5,6 +5,11 @@ import { OAuth2Scopes } from 'discord-api-types/payloads/v10';
 
 type Scopes = 'dashboard' | 'invite' | undefined;
 
+type RedirectTo = {
+	pathname: string;
+	slug?: string;
+};
+
 function checkScope(scope: Scopes | undefined): string | undefined {
 	// We also require the 'identify' and 'email' scopes, but those are provided by default
 	if (scope === 'dashboard') {
@@ -20,7 +25,7 @@ function checkScope(scope: Scopes | undefined): string | undefined {
 export async function login(
 	event: RequestEvent | LoadEvent | ServerLoadEvent,
 	scope: Scopes = undefined,
-	redirectTo?: string,
+	redirectTo?: RedirectTo,
 	queryParams?: { [key: string]: string }
 ) {
 	const { supabaseClient } = await getSupabase(event);
@@ -28,7 +33,10 @@ export async function login(
 		provider: 'discord',
 		options: {
 			scopes: checkScope(scope),
-			redirectTo,
+			// TODO: Let's abstract this ternary out since it is hard to read.
+			redirectTo: `${event.url.origin}/redirect${
+				redirectTo?.pathname ? `?pathname=${redirectTo.pathname}` : ''
+			}${redirectTo?.slug ? `&slug=${redirectTo.slug}` : ''}`,
 			queryParams
 		}
 	});
