@@ -8,5 +8,5 @@ export const actions = {
 } satisfies Actions;
 
 export const load = (async (event) => {
-	await login(event, 'dashboard', `${event.url.origin}/redirect`);
+	await login(event, 'dashboard', { pathname: 'dashboard' });
 }) satisfies PageServerLoad;
