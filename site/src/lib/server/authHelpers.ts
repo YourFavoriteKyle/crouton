@@ -22,6 +22,19 @@ function checkScope(scope: Scopes | undefined): string | undefined {
 	return undefined;
 }
 
+function redirectToString(
+	event: RequestEvent | LoadEvent | ServerLoadEvent,
+	re?: RedirectTo
+): string {
+	const baseString = `${event.url.origin}/redirect`;
+
+	if (!re || !re.pathname) return baseString;
+
+	if (!re.slug) return `${baseString}?pathname=${re.pathname}`;
+
+	return `${baseString}?pathname=${re.pathname}&slug=${re.slug}`;
+}
+
 export async function login(
 	event: RequestEvent | LoadEvent | ServerLoadEvent,
 	scope: Scopes = undefined,
@@ -33,10 +46,7 @@ export async function login(
 		provider: 'discord',
 		options: {
 			scopes: checkScope(scope),
-			// TODO: Let's abstract this ternary out since it is hard to read.
-			redirectTo: `${event.url.origin}/redirect${
-				redirectTo?.pathname ? `?pathname=${redirectTo.pathname}` : ''
-			}${redirectTo?.slug ? `&slug=${redirectTo.slug}` : ''}`,
+			redirectTo: redirectToString(event, redirectTo),
 			queryParams
 		}
 	});
