@@ -1,53 +1,21 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import type { RESTAPIPartialCurrentUserGuild } from 'discord-api-types/v10';
 	import Section from '$lib/components/section.svelte';
-	import DiscordIcon from '$lib/svg/discordIcon.svelte';
 	import OwnerIcon from '$lib/svg/ownerIcon.svelte';
 	import ModeratorIcon from '$lib/svg/moderatorIcon.svelte';
+	import GuildIcon from '$lib/components/guildIcon.svelte';
 
 	export let data: PageData;
-
-	// console.log(data);
-
-	function constructIconURL(guildData: RESTAPIPartialCurrentUserGuild): {
-		type: 'image/webp' | 'image/gif';
-		url: string;
-		fallback: string;
-	} | null {
-		const baseCDN = 'https://cdn.discordapp.com/';
-
-		if (!guildData.icon) return null;
-
-		const iconURL = `${baseCDN}icons/${guildData.id}/${guildData.icon}`;
-		const fallback = `${baseCDN}icons/${guildData.id}/${guildData.icon}.png`;
-
-		if (guildData.icon.startsWith('a_')) {
-			return { type: 'image/gif', url: `${iconURL}.gif`, fallback };
-		}
-
-		return { type: 'image/webp', url: `${iconURL}.webp`, fallback };
-	}
 </script>
 
 <div class="dashboard">
-	<h1>Welcome to your bakery! Choose your guild to get started!</h1>
+	<h1>Welcome to your bakery! Choose your server to get started!</h1>
 	<Section half={true} --section-text-align="center" --section-flex-wrap="wrap">
 		<div class="guild-wrapper">
 			{#each data.userGuilds as guild (guild.id)}
-				{@const iconData = constructIconURL(guild)}
 				<div class="guild">
 					<div class="info">
-						<div class="icon">
-							{#if iconData}
-								<picture>
-									<source srcset={iconData.url} type={iconData.type} />
-									<img loading="lazy" alt="guild icon" src={iconData.fallback} />
-								</picture>
-							{:else}
-								<DiscordIcon theme="blue" />
-							{/if}
-						</div>
+						<GuildIcon {guild} />
 						<p class="name">{guild.name}</p>
 						{#if guild.owner}
 							<div class="permission-icon">
@@ -88,21 +56,6 @@
 		align-items: center;
 		margin-bottom: 0.5rem;
 		height: inherit;
-	}
-	.info > .icon img {
-		border-radius: 50%;
-	}
-
-	.info > .icon source {
-		display: none;
-	}
-
-	.guild > .info > .icon {
-		display: inherit;
-		width: 3rem;
-		height: 3rem;
-		margin-right: 1rem;
-		margin-left: 0.5rem;
 	}
 
 	.permission-icon {
