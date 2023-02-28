@@ -23,3 +23,10 @@
 		</clipPath>
 	</defs>
 </svg>
+
+<style>
+	svg {
+		width: 1rem;
+		height: 1rem;
+	}
+</style>

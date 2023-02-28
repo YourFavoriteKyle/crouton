@@ -17,15 +17,13 @@
 					<div class="info">
 						<GuildIcon {guild} />
 						<p class="name">{guild.name}</p>
-						{#if guild.owner}
-							<div class="permission-icon">
+						<div class="permission-icon">
+							{#if guild.owner}
 								<OwnerIcon />
-							</div>
-						{:else if guild.permissions_flags?.ManageGuild}
-							<div class="permission-icon">
+							{:else if guild.permissions_flags?.ManageGuild}
 								<ModeratorIcon />
-							</div>
-						{/if}
+							{/if}
+						</div>
 					</div>
 					<a href="dashboard/{guild.id}">Configure</a>
 				</div>
@@ -47,6 +45,10 @@
 	}
 
 	.guild {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		padding: 1rem;
 		border: 1px solid var(--nord2);
 	}
@@ -61,10 +63,16 @@
 	.permission-icon {
 		align-self: flex-start;
 		margin-left: auto;
+		position: absolute;
+		right: 0.5rem;
+		top: 0.5rem;
 	}
 
 	.name {
 		text-align: left;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	a {

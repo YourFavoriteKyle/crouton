@@ -59,6 +59,9 @@
 	}
 	/* NAVBAR STYLING */
 	nav {
+		/* Fixes some scrollable elements with relative positioning scrolling above navbar */
+		z-index: 1;
+
 		background-color: var(--nav-bg-color);
 		position: fixed;
 		top: 0;

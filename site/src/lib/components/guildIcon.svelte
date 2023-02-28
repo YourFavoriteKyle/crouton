@@ -12,6 +12,7 @@
 	}
 
 	export let guild: GuildData;
+	export let width = '3rem';
 
 	function getIconData(guildData: GuildData) {
 		const baseCDN = 'https://cdn.discordapp.com/';
@@ -31,7 +32,7 @@
 	const iconData = getIconData(guild);
 </script>
 
-<div class="icon">
+<div class="icon" style:width>
 	{#if iconData}
 		<picture>
 			<source srcset={iconData.url} type={iconData.type} />
@@ -53,8 +54,8 @@
 
 	.icon {
 		display: inherit;
-		width: 3rem;
-		height: 3rem;
+		height: auto;
+		flex-shrink: 0;
 		margin-right: 1rem;
 		margin-left: 0.5rem;
 	}
