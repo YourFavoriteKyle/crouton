@@ -1,9 +1,10 @@
 import type { PageServerLoad } from './$types';
-import { redirect } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { getGuild } from '$lib/server/discord';
 import { BOT_TOKEN } from '$env/static/private';
 import type { DiscordErrorData } from '@discordjs/rest';
+import type { APIGuild } from 'discord-api-types/v10';
 
 export const load = (async (event) => {
 	const { session } = await getSupabase(event);
@@ -18,5 +19,9 @@ export const load = (async (event) => {
 		throw redirect(303, `/invite/?guild_id=${event.params.guild}`);
 	}
 
-	return { guild };
+	if ((guild as DiscordErrorData).code) {
+		throw error(500, 'Something went wrong while getting your server data.');
+	}
+
+	return { guild: <APIGuild>guild };
 }) satisfies PageServerLoad;
