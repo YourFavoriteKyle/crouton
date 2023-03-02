@@ -34,6 +34,11 @@
 		display: inline-block;
 		position: relative;
 	}
+
+	.img-container > img:hover {
+		cursor: pointer;
+	}
+
 	.dropdown {
 		background-color: white;
 		padding: 1rem;
