@@ -8,6 +8,14 @@
 	export let data: PageData;
 </script>
 
+<svelte:head>
+	<title>Welcome to your bakery - Crouton Bot</title>
+	<meta
+		name="description"
+		content="Every one of your servers, all together. Manage and configure from anywhere, exactly as you need it."
+	/>
+</svelte:head>
+
 <div class="dashboard">
 	<h1>Welcome to your bakery! Choose your server to get started!</h1>
 	<Section half={true} --section-text-align="center" --section-flex-wrap="wrap">

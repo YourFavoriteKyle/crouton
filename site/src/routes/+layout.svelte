@@ -34,6 +34,16 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Charcuterie Board of Discord Bots - Crouton Bot</title>
+	<meta name="application-name" content="Crouton Bot" />
+	<meta name="author" content="Crouton Bot" />
+	<meta
+		name="description"
+		content="Crouton is a fantastic Discord bot that provides a unique way of managing your server. Invite Crouton today and empower your server!"
+	/>
+</svelte:head>
+
 <div class="layout">
 	<Nav />
 	<div class="content">

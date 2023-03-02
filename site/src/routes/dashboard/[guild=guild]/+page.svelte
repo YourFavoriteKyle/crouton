@@ -7,6 +7,10 @@
 	const guild = data.guild;
 </script>
 
+<svelte:head>
+	<title>{guild.name} - Crouton Bot</title>
+</svelte:head>
+
 <div class="container">
 	<Header {guild} />
 	<Boost {guild} />
