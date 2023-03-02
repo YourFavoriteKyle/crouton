@@ -2,4 +2,4 @@
 	import Error from '$lib/components/error.svelte';
 </script>
 
-<Error errorCode="404" errorMessage="" />
+<Error errorCode="501" errorMessage="We're still rising to the occasion!" />
