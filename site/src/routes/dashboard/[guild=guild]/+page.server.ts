@@ -1,13 +1,12 @@
 import type { PageServerLoad } from './$types';
 import { error, redirect } from '@sveltejs/kit';
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { getGuild } from '$lib/server/discord';
 import { BOT_TOKEN } from '$env/static/private';
 import type { DiscordErrorData } from '@discordjs/rest';
 import type { APIGuild } from 'discord-api-types/v10';
 
 export const load = (async (event) => {
-	const { session } = await getSupabase(event);
+	const session = await event.locals.getSession();
 
 	if (!session || !session.provider_token) {
 		throw redirect(303, '/login');

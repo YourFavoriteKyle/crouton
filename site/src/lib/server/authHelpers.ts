@@ -1,6 +1,4 @@
-import type { RequestEvent, LoadEvent, ServerLoadEvent } from '@sveltejs/kit';
-import { redirect, error as err } from '@sveltejs/kit';
-import { getSupabase } from '@supabase/auth-helpers-sveltekit';
+import { redirect, error as err, type RequestEvent } from '@sveltejs/kit';
 import { OAuth2Scopes } from 'discord-api-types/payloads/v10';
 
 type Scopes = 'dashboard' | 'invite' | undefined;
@@ -22,10 +20,7 @@ function checkScope(scope: Scopes | undefined): string | undefined {
 	return undefined;
 }
 
-function redirectToString(
-	event: RequestEvent | LoadEvent | ServerLoadEvent,
-	re?: RedirectTo
-): string {
+function redirectToString(event: RequestEvent, re?: RedirectTo): string {
 	const baseString = `${event.url.origin}/redirect`;
 
 	if (!re || !re.pathname) return baseString;
@@ -36,13 +31,12 @@ function redirectToString(
 }
 
 export async function login(
-	event: RequestEvent | LoadEvent | ServerLoadEvent,
+	event: RequestEvent,
 	scope: Scopes = undefined,
 	redirectTo?: RedirectTo,
 	queryParams?: { [key: string]: string }
 ) {
-	const { supabaseClient } = await getSupabase(event);
-	const { data, error } = await supabaseClient.auth.signInWithOAuth({
+	const { data, error } = await event.locals.supabase.auth.signInWithOAuth({
 		provider: 'discord',
 		options: {
 			scopes: checkScope(scope),

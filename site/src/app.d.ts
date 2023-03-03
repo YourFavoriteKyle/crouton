@@ -2,15 +2,16 @@
 // for information about these interfaces
 // and what to do when importing types
 declare namespace App {
-	interface Supabase {
-		Database: import('./DatabaseDefinitions').Database;
+	import { SupabaseClient, Session } from '@supabase/supabase-js';
+	import { Database } from './DatabaseDefinitions';
 
-		SchemaName: 'public';
-	}
 	// interface Error {}
-	// interface Locals {}
+	interface Locals {
+		supabase: SupabaseClient<Database>;
+		getSession(): Promise<Session | null>;
+	}
 	interface PageData {
-		session: import('@supabase/supabase-js').Session | null;
+		session: Session | null;
 	}
 	// interface Platform {}
 }

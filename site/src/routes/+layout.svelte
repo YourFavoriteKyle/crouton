@@ -1,9 +1,7 @@
 <script lang="ts">
 	import type { LayoutServerData } from './$types';
 	import '../app.css';
-	import { supabase } from '$lib/db';
 	import { browser, dev } from '$app/environment';
-	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Nav from '$lib/components/nav/nav.svelte';
@@ -21,16 +19,6 @@
 				debug: false
 			});
 		}
-
-		const {
-			data: { subscription }
-		} = supabase.auth.onAuthStateChange(() => {
-			invalidateAll();
-		});
-
-		return () => {
-			subscription.unsubscribe();
-		};
 	});
 </script>
 
