@@ -13,3 +13,6 @@ DS_STORE
 config.json
 .vercel
 *.code-workspace
+#supabase
+supabase/.branches
+supabase/.temp
