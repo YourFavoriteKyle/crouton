@@ -53,7 +53,6 @@
 	}
 
 	.icon {
-		display: inherit;
 		height: auto;
 		flex-shrink: 0;
 		margin-right: 1rem;
