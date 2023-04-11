@@ -1,15 +1,9 @@
 import type { PageServerLoad } from './$types';
-import { redirect } from '@sveltejs/kit';
 import { getGuilds } from '$lib/server/discord';
 
-export const load = (async (event) => {
-	const session = await event.locals.getSession();
+export const load = (async ({ locals }) => {
+	const userGuilds = await getGuilds(locals.providerData.access_token);
 
-	if (!session || !session.provider_token) {
-		throw redirect(303, '/login');
-	}
-
-	const userGuilds = await getGuilds(session?.provider_token);
 	userGuilds.sort((a, b) => {
 		if (a.owner != b.owner) {
 			return -1;

@@ -6,12 +6,6 @@ import type { DiscordErrorData } from '@discordjs/rest';
 import type { APIGuild } from 'discord-api-types/v10';
 
 export const load = (async (event) => {
-	const session = await event.locals.getSession();
-
-	if (!session || !session.provider_token) {
-		throw redirect(303, '/login');
-	}
-
 	const guild = await getGuild(BOT_TOKEN, event.params.guild);
 
 	if ((guild as DiscordErrorData).code === 10004) {

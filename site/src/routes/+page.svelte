@@ -8,7 +8,7 @@
 	<p>Don't worry! We've got you covered like butter on bread.<br />It's the yeast we could do.</p>
 	<div>
 		<PrimaryButton
-			method={'POST'}
+			method={'GET'}
 			action={'/invite'}
 			--button-bg-color="var(--nord8)"
 			--button-color="var(--nord2)"

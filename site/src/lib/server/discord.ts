@@ -2,7 +2,7 @@ import { type RESTAPIPartialCurrentUserGuild, type APIGuild, Routes } from 'disc
 import { DiscordAPIError, REST, type DiscordErrorData } from '@discordjs/rest';
 import { type PermissionFlagsBits, PermissionsBitField } from 'discord.js';
 
-const rest = (() => {
+export const rest = (() => {
 	const rest = new REST({ version: '10' });
 
 	return rest;

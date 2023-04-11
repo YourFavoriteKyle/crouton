@@ -9,9 +9,17 @@ declare global {
 		interface Locals {
 			supabase: SupabaseClient<Database>;
 			getSession(): Promise<Session | null>;
+			providerData: Pick<
+				Database['public']['Tables']['provider_data']['Row'],
+				'access_token' | 'expires_at'
+			>;
 		}
 		interface PageData {
 			session: Session | null;
+			providerData: Pick<
+				Database['public']['Tables']['provider_data']['Row'],
+				'access_token' | 'expires_at'
+			>;
 		}
 		// interface Error {}
 		// interface Platform {}

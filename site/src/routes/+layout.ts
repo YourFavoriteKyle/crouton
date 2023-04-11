@@ -21,5 +21,10 @@ export const load = (async ({ fetch, data, depends }) => {
 		data: { session }
 	} = await supabase.auth.getSession();
 
-	return { supabase, session, vercelVitalsID: data.vercelVitalsID };
+	return {
+		supabase,
+		session,
+		vercelVitalsID: data.vercelVitalsID,
+		providerData: data.providerData
+	};
 }) satisfies LayoutLoad;

@@ -1,5 +1,7 @@
-import { redirect, error as err, type RequestEvent } from '@sveltejs/kit';
-import { OAuth2Scopes } from 'discord-api-types/payloads/v10';
+import { redirect, error as err, type RequestEvent, type Cookies } from '@sveltejs/kit';
+import { OAuth2Scopes } from 'discord-api-types/v10';
+import type { PostgrestSingleResponse } from '@supabase/postgrest-js';
+import type { Database } from '$lib/database';
 
 type Scopes = 'dashboard' | 'invite' | undefined;
 
@@ -50,4 +52,64 @@ export async function login(
 	}
 
 	throw err(500, 'Server error. Please try again later.');
+}
+
+/**
+ *
+ * @param event - The current SvelteKit RequestEvent
+ * @returns SvelteKit Redirect on Errors for Unauthorized events
+ * @returns provider_data from a cookie if available.
+ * @returns provider_data from the database if no cookie is available.
+ */
+export async function getDBProviderData(event: RequestEvent) {
+	const session = await event.locals.getSession();
+
+	if (!session) {
+		return redirect(303, '/');
+	}
+
+	const providerData = event.cookies.get('provider-data');
+	if (providerData) {
+		return <Database['public']['Tables']['provider_data']['Row']>JSON.parse(providerData);
+	}
+
+	const dbSelectProviderData: PostgrestSingleResponse<
+		Database['public']['Tables']['provider_data']['Row']
+	> = await event.locals.supabase.from('provider_data').select().limit(1).single();
+
+	if (dbSelectProviderData.error) {
+		return err(500, 'Something went wrong while loading user data.');
+	}
+
+	if (!dbSelectProviderData.data.access_token) {
+		return redirect(303, '/');
+	}
+
+	return dbSelectProviderData.data;
+}
+
+export function setProviderCookieAndLocals(
+	cookies: Cookies,
+	locals: App.Locals,
+	providerData: App.Locals['providerData']
+) {
+	// TODO: Sign tokens
+	cookies.set(
+		'provider-data',
+		JSON.stringify({
+			access_token: providerData.access_token,
+			expires_at: providerData.expires_at
+		}),
+		{
+			secure: true,
+			sameSite: false,
+			path: '/',
+			expires: new Date(providerData.expires_at)
+		}
+	);
+
+	locals.providerData = {
+		access_token: providerData.access_token,
+		expires_at: providerData.expires_at
+	};
 }
