@@ -1,26 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	export let method: string | undefined = undefined;
-	export let action: string | undefined = undefined;
 	export let href: string | undefined = undefined;
 	export let active = true;
 </script>
 
-{#if !method}
-	<a {href} class:active={$page.url.pathname === href && active}>
-		<span>
-			<slot />
-		</span>
-	</a>
-{:else}
-	<form {method} {action}>
-		<button>
-			<span>
-				<slot />
-			</span>
-		</button>
-	</form>
-{/if}
+<a {href} class:active={$page.url.pathname === href && active}>
+	<span>
+		<slot />
+	</span>
+</a>
 
 <style>
 	:root {
@@ -37,9 +25,6 @@
 		border-radius: 0.5rem;
 		transition: 0.3s ease;
 		color: var(--button-hover-color);
-	}
-	form {
-		display: inline-block;
 	}
 	.active {
 		border-bottom-width: 0.1rem;

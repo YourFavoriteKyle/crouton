@@ -17,8 +17,7 @@
 						--button-hover-bg-color="none"
 						--button-padding="0"
 						--button-border-width="0"
-						method={'POST'}
-						action={'/invite'}>Invite</PrimaryButton
+						href={'/invite'}>Invite</PrimaryButton
 					>
 				</li>
 				<li>
