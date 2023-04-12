@@ -23,8 +23,6 @@
 
 ## Getting Started
 
-We are now referring to the project and bot as Crouton, the github repository is still currently named ewok-translator. The repository will be renamed to Crouton in the future.
-
 While we currently use Supabase and Vercel to host our data and front-end, we will not be covering how to utilize Supabase and Vercel in your deployment. The quick start guide will only cover how to get started in a basic development environment at this time.
 
 ### Installation
