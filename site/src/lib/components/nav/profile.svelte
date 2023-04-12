@@ -14,7 +14,7 @@
 		<img src={$page.data.session?.user.user_metadata.avatar_url} alt="User Avatar" />
 		<p class="username">{$page.data.session?.user.user_metadata.name}</p>
 		<p class="email">{$page.data.session?.user.user_metadata.email}</p>
-		<PrimaryButton href={'/logout'}>Sign Out</PrimaryButton>
+		<PrimaryButton reload={true} href={'/logout'}>Sign Out</PrimaryButton>
 	</div>
 </li>
 

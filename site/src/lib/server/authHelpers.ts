@@ -5,11 +5,6 @@ import type { Database } from '$lib/database';
 
 type Scopes = 'dashboard' | 'invite' | undefined;
 
-type RedirectTo = {
-	pathname: string;
-	slug?: string;
-};
-
 function checkScope(scope: Scopes | undefined): string | undefined {
 	// We also require the 'identify' and 'email' scopes, but those are provided by default
 	if (scope === 'dashboard') {
@@ -22,27 +17,25 @@ function checkScope(scope: Scopes | undefined): string | undefined {
 	return undefined;
 }
 
-function redirectToString(event: RequestEvent, re?: RedirectTo): string {
+function redirectToString(event: RequestEvent, internalRedirectTo?: string): string {
 	const baseString = `${event.url.origin}/redirect`;
 
-	if (!re || !re.pathname) return baseString;
+	if (!internalRedirectTo) return baseString;
 
-	if (!re.slug) return `${baseString}?pathname=${re.pathname}`;
-
-	return `${baseString}?pathname=${re.pathname}&slug=${re.slug}`;
+	return `${baseString}?internal_redirect_to=${internalRedirectTo}`;
 }
 
 export async function login(
 	event: RequestEvent,
 	scope: Scopes = undefined,
-	redirectTo?: RedirectTo,
+	internalRedirectTo?: string,
 	queryParams?: { [key: string]: string }
 ) {
 	const { data, error } = await event.locals.supabase.auth.signInWithOAuth({
 		provider: 'discord',
 		options: {
 			scopes: checkScope(scope),
-			redirectTo: redirectToString(event, redirectTo),
+			redirectTo: redirectToString(event, internalRedirectTo),
 			queryParams
 		}
 	});
@@ -65,7 +58,7 @@ export async function getDBProviderData(event: RequestEvent) {
 	const session = await event.locals.getSession();
 
 	if (!session) {
-		return redirect(303, '/');
+		return redirect(303, `/login?internal_redirect_to=${event.url.pathname}`);
 	}
 
 	const providerData = event.cookies.get('provider-data');
@@ -82,7 +75,7 @@ export async function getDBProviderData(event: RequestEvent) {
 	}
 
 	if (!dbSelectProviderData.data.access_token) {
-		return redirect(303, '/');
+		return redirect(303, `/login?internal_redirect_to=${event.url.pathname}`);
 	}
 
 	return dbSelectProviderData.data;

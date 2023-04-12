@@ -7,7 +7,7 @@ export const GET = (async (event) => {
 	const session = await event.locals.getSession();
 
 	if (!session || !session.provider_token || !session.provider_refresh_token) {
-		throw redirect(303, '/');
+		throw redirect(303, `/login?internal_redirect_to=${event.url.pathname}`);
 	}
 
 	const tokenInfo = await (

@@ -21,13 +21,10 @@ export const load = (async (event) => {
 		throw tokenResponse;
 	}
 
-	const [pathname, slug] = [
-		event.url.searchParams.get('pathname'),
-		event.url.searchParams.get('slug')
-	];
+	const internalRedirectTo = event.url.searchParams.get('internal_redirect_to');
 
-	if (pathname) {
-		throw redirect(303, `/${pathname}${slug ? `/${slug}` : ''}`);
+	if (internalRedirectTo) {
+		throw redirect(303, `${internalRedirectTo}`);
 	}
 
 	throw redirect(303, '/dashboard');

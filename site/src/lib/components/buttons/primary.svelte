@@ -2,13 +2,22 @@
 	import { page } from '$app/stores';
 	export let href: string | undefined = undefined;
 	export let active = true;
+	export let reload = false;
 </script>
 
-<a {href} class:active={$page.url.pathname === href && active}>
-	<span>
-		<slot />
-	</span>
-</a>
+{#if reload}
+	<a {href} data-sveltekit-reload class:active={$page.url.pathname === href && active}>
+		<span>
+			<slot />
+		</span>
+	</a>
+{:else}
+	<a {href} class:active={$page.url.pathname === href && active}>
+		<span>
+			<slot />
+		</span>
+	</a>
+{/if}
 
 <style>
 	:root {
