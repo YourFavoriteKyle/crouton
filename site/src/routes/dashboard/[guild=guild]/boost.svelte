@@ -29,8 +29,15 @@
 		return 0;
 	}
 
-	const subCount = tweened(0, { duration: 400, easing: cubicOut });
-	const activeTier = tweened(1, { delay: 1200, duration: 300, easing: backOut });
+	const subCount = tweened(0, {
+		duration: 57 * (guild.premium_subscription_count ? guild.premium_subscription_count : 0),
+		easing: cubicOut
+	});
+	const activeTier = tweened(1, {
+		delay: 400 * (guild.premium_tier + 1),
+		duration: 300,
+		easing: backOut
+	});
 
 	let currentCount = guild.premium_subscription_count ? guild.premium_subscription_count : 0;
 
