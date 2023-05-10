@@ -28,17 +28,12 @@ While we currently use Supabase and Vercel to host our data and front-end, we wi
 ### Installation
 
 1. First, we will clone the repo.
+
    ```sh
-   git clone https://github.com/YourFavoriteKyle/ewok-translator.git
+   git clone https://github.com/YourFavoriteKyle/crouton.git
    ```
-2. Next, we will install dependencies at the top level, and the `/bot` and `/site` directories.
-   ```sh
-   cd ewok-translator
-   npm i
-   cd bot && npm i
-   cd ../site && npm i
-   ```
-3. We will need a `.env` file at the root of the project. This single file will be used for both `/bot` and `/site`.
+
+2. We will need a `.env` file at the root of the project. This single file will be used for both `/bot` and `/site`.
 
    ```sh
    # Used by the bot
@@ -49,6 +44,26 @@ While we currently use Supabase and Vercel to host our data and front-end, we wi
    # Regardless if you are using Supabase, site expects this key
    # to be present unless you change it in the site code
    SUPABASE_DISCORD_AUTH_REDIRECT_URL="your-supabase-discord-oauth-redirect-url"
+   ```
+
+   2.1 If you are using Docker, <a href="#docker">click here</a> to skip ahead.
+   <br />
+
+3. Finally, install the dependencies at the top level and the `/bot` and `/site` directories.
+
+   ```sh
+   npm i
+   cd bot && npm i
+   cd ../site && npm i
+   ```
+
+#### <p name="docker">Docker</p>
+
+1. Using docker is pretty straightforward. There is no image unfortunately, so you will still need to clone the repository first. There are compose files for every function, or just each individual component.
+
+   ```sh
+   cd bot
+   docker compose --env-file=../.env up
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
