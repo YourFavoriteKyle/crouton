@@ -4,6 +4,7 @@ node_modules
 !.env.example
 /site/build
 /bot/build
+/bot/registerCommands/build
 /site/.svelte-kit
 /site/package
 vite.config.js.timestamp-*
