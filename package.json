@@ -12,7 +12,12 @@
 		"sb:diff": "source .env.local && CLIENT_ID=$CLIENT_ID CLIENT_SECRET=$CLIENT_SECRET npx supabase db diff",
 		"sb:types": "source .env.local && CLIENT_ID=$CLIENT_ID CLIENT_SECRET=$CLIENT_SECRET npx supabase gen types typescript --local > site/src/lib/database.d.ts",
 		"sb:reset": "source .env.local && CLIENT_ID=$CLIENT_ID CLIENT_SECRET=$CLIENT_SECRET npx supabase db reset",
-		"sb:push": "source .env.local && CLIENT_ID=$CLIENT_ID CLIENT_SECRET=$CLIENT_SECRET npx supabase db push"
+		"sb:push": "source .env.local && CLIENT_ID=$CLIENT_ID CLIENT_SECRET=$CLIENT_SECRET npx supabase db push",
+		"docker:push": "docker buildx --platform=linux/arm64,linux/amd64 -t yourfavoritekyle/crouton_bot_standard --push ./bot",
+		"docker:build": "docker build -t yourfavoritekyle/crouton_bot_standard ./bot",
+		"docker:dev": "docker compose --project-directory ./bot --env-file=.env.local up",
+		"docker:prod": "docker compose --project-directory ./bot --env-file=.env up",
+		"docker:down": "docker compose --project-directory ./bot --env-file=.env down --volumes"
 	},
 	"devDependencies": {
 		"@types/node": "^18.11.18",
