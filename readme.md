@@ -36,14 +36,18 @@ While we currently use Supabase and Vercel to host our data and front-end, we wi
 2. We will need a `.env` file at the root of the project. This single file will be used for both `/bot` and `/site`.
 
    ```sh
-   # Used by the bot
    BOT_TOKEN="your-extremely-sensitive-discord-bot-token"
    CLIENT_SECRET="your-very-secret-discord-client-secret"
    CLIENT_ID="your-discord-client-id"
 
-   # Regardless if you are using Supabase, site expects this key
-   # to be present unless you change it in the site code
+   # Secrets prefixed with PUBLIC are okay to share.
+   PUBLIC_SUPABASE_URL="https://<your-supabase-project-id>.supabase.co"
+   PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
    SUPABASE_DISCORD_AUTH_REDIRECT_URL="your-supabase-discord-oauth-redirect-url"
+
+   # DO NOT SHARE YOUR SERVICE ROLE KEY
+   # Supabase requests made with this key bypass RLS and can be dangerous!
+   SUPABASE_SERVICE_ROLE_KEY="your-super-secret-no-sharing-supabase-service-role-key"
    ```
 
    2.1 If you are using Docker, <a href="#docker">click here</a> to skip ahead.
