@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <h1 align="center">Crouton</h3>
+  <h1 align="center">Crouton</h1>
 
   <p align="center">
     A bread themed Discord bot, a<u>bun</u>dantly full of bread puns!
@@ -18,6 +18,23 @@
   <a href="https://supabase.com">Supabase</a>
   </p>
 </div>
+
+<br />
+<br />
+
+<h1 align="center">NOTICE</h1>
+<p align="center">This project is being moved to the Arcturis Studio workspace. Please keep in mind this is a side project and is slow moving on development.</p>
+<p align="center">Please see below for updated links to the project.</p>
+
+<br/>
+
+<div align="center">
+   <a align="center" href="https://github.com/orgs/Arcturis-Studio/repositories">Arcturis Studio</a>
+</div>
+
+<br />
+<br />
+<br />
 
 <!-- GETTING STARTED -->
 
